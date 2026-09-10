@@ -257,21 +257,42 @@
         }
         @media (max-width: 600px) {
             body {
-                padding:2rem 0;
-            }
-            h1 {
-                font-size:5rem;
+                padding:1rem 0;
+                display:flex;
+                flex-direction:column;
+                min-height:100vh;
             }
             .container {
                 display:flex;
                 flex-direction:column;
+                flex:1;
+                padding:0 0.5rem;
+            }
+            h1 {
+                font-size:5rem;
+            }
+            .sub {
+                margin-top:0.2em;
+            }
+            .divider {
+                margin:0.8em auto;
             }
             .player {
                 order:2;
+                margin-top:1em;
             }
             .bio {
                 order:1;
-                margin-top:1.5em;
+                margin-top:0.8em;
+                padding:0;
+            }
+            .bio p {
+                margin-bottom:0.6em;
+            }
+            .footer {
+                margin-top:1em;
+                margin-bottom:0;
+                text-align:center;
             }
             .player {
                 display:block;
