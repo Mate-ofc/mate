@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mate — DJ & Producer</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        @font-face {
+            font-family: 'MainFont';
+            src: url('Шрифты/AbegPrettyLindaCute.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        html {
+            background:#111;
+        }
+        body {
+            background:#111;
+            color:#fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            padding:4rem 0;
+        }
+        .video-background {
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            z-index:0;
+            pointer-events:none;
+        }
+        .video-overlay {
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background:rgba(0,0,0,0.9);
+            z-index:1;
+            pointer-events:none;
+        }
+        .container {
+            position:relative;
+            z-index:2;
+        }
+        .container {
+            text-align:center;
+            width:100%;
+            max-width:900px;
+            padding:0 2rem;
+            margin:0 auto;
+        }
+        h1 {
+            font-family: 'MainFont', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 15rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        .sub {
+            font-size: 1rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color:#888;
+            margin-top:0.5em;
+        }
+        .divider {
+            width:60px;
+            height:1px;
+            background:#333;
+            margin:2em auto;
+        }/* Стили плеера */
+        .player {
+            margin-top:3em;
+            background:#000000;
+            border-radius:12px;
+            text-align:left;
+            position:relative;
+            overflow:hidden;
+            padding-left:220px;
+        }
+        .cover-art {
+            position:absolute;
+            top:0;
+            bottom:0;
+            left:0;
+            width:220px;
+            height:100%;
+            object-fit:cover;
+            display:block;
+            border-radius:12px 0 0 12px;
+        }
+        .disc-art {
+            position:absolute;
+            top:50%;
+            left:110px;
+            width:194px;
+            height:194px;
+            transform:translate(-50%, -50%);
+            border-radius:50%;
+            object-fit:cover;
+            z-index:2;
+            animation:spin 4s linear infinite;
+            animation-play-state:paused;
+        }
+        .disc-art.spinning {
+            animation-play-state:running;
+        }
+        @keyframes spin {
+            from { transform:translate(-50%, -50%) rotate(0deg); }
+            to { transform:translate(-50%, -50%) rotate(360deg); }
+        }
+        .player-content {
+            padding:1.5rem 1.5rem 1rem 1.5rem;
+        }
+        .player-header {
+            display:flex;
+            align-items:center;
+            gap:1rem;
+            margin-bottom:1rem;
+        }
+        .play-btn {
+            width:48px;
+            height:48px;
+            border-radius:50%;
+            background:#e0e0e0;
+            border:none;
+            color:#000000;
+            font-size:1.2rem;
+            cursor:pointer;
+            flex-shrink:0;
+            transition:background 0.2s;
+        }
+        .play-btn:hover {
+            background:#c0c0c0;
+        }
+        .track-info {
+            flex:1;
+            min-width:0;
+        }
+        #trackTitle {
+            font-size:0.9rem;
+            font-weight:600;
+            margin-bottom:0.2rem;
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+        }
+        .track-artist {
+            font-size:0.8rem;
+            color:#888;
+        }
+        .download-icon {
+            margin-left:1rem;
+            margin-top:-4px;
+            color:#888;
+            text-decoration:none;
+            cursor:pointer;
+            transition:color 0.2s;
+            flex-shrink:0;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            width:28px;
+            height:28px;
+        }
+        .download-icon:hover {
+            color:#e0e0e0;
+        }
+        .download-icon svg {
+            width:20px;
+            height:20px;
+            stroke:currentColor;
+            stroke-width:1.5;
+            fill:none;
+            stroke-linecap:round;
+            stroke-linejoin:round;
+        }
+        .wave-container {
+            width:100%;
+            height:80px;
+            margin:1rem 0;
+            cursor:pointer;
+            position:relative;
+        }
+        #waveCanvas {
+            width:100%;
+            height:100%;
+            display:block;
+        }
+        .progress-bar {
+            width:100%;
+            height:4px;
+            background:#2a2a2a;
+            border-radius:2px;
+            cursor:pointer;
+            margin-top:0.5rem;
+            position:relative;
+        }
+        #progressFill {
+            width:0%;
+            height:100%;
+            background:#e0e0e0;
+            border-radius:2px;
+            transition:width 0.1s linear;
+        }
+        .time-display {
+            display:flex;
+            justify-content:space-between;
+            font-size:0.75rem;
+            color:#888;
+            margin-top:0.5rem;
+            margin-bottom:0;
+        }
+        
+        .bio {
+            margin-top:2.5em;
+            font-size:0.9rem;
+            line-height:1.7;
+            color:#999;
+            text-align:center;
+            max-width:700px;
+            margin-left:auto;
+            margin-right:auto;
+        }
+        .bio p {
+            margin-bottom:1em;
+        }
+        .bio strong {
+            color:#e0e0e0;
+            font-weight:600;
+        }
+        .footer {
+            margin-top:3em;
+            font-size:0.7rem;
+            color:#555;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            h1 {
+                font-size:8rem;
+            }
+            .container {
+                padding:0 1rem;
+            }.player {
+                padding:1rem;
+            }
+            .wave-container {
+                height:60px;
+            }
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size:5rem;
+            }}
+    </style>
+</head>
+<body>
+    <video class="video-background" autoplay muted loop playsinline>
+        <source src="Видео/coverr-cheering-crowd-1136-1080p.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+    <div class="container">
+        <h1>Mate</h1>
+        <p class="sub">DJ & Producer</p>
+        <div class="divider"></div><!-- Плеер -->
+        <div class="player">
+            <img src="Audio/Обложка 1.png" alt="Обложка" class="cover-art">
+            <img src="Audio/Обложка 2.png" alt="Диск" class="disc-art" id="discArt">
+            <div class="player-content">
+            <div class="player-header">
+                <button class="play-btn" id="playBtn">▶</button>
+                <div class="track-info">
+                    <div id="trackTitle">Echoes of Dusk (Extended Mix)</div>
+                    <div class="track-artist">Mate</div>
+                </div>
+                <a href="Audio/Mate - Echoes of Dusk (Extended Mix).mp3" download class="download-icon" title="Скачать трек"><svg viewBox="0 0 24 24"><path d="M12 4v12m0 0l-5-5m5 5l5-5"/><path d="M4 20h16"/></svg></a>
+            </div>
+            <div class="wave-container" id="waveContainer">
+                <canvas id="waveCanvas"></canvas>
+            </div>
+            <div class="progress-bar" id="progressBar">
+                <div id="progressFill"></div>
+            </div>
+            <div class="time-display">
+                <span id="currentTime">0:00</span>
+                <span id="duration">0:00</span>
+            </div>
+            </div>
+            </div>
+        
+        <div class="bio">
+            <p><strong>Mate</strong> — саунд-продюсер с фокусом на Deep House и Organic House. Звуковая концепция проекта строится на плотном басовом фундаменте, умеренной динамике и аккуратной работе с вокальными сэмплами.</p>
+            <p>Дебютный сингл «Echoes of Dusk» демонстрирует характерные черты стиля артиста: сдержанную структуру аранжировки, тёплый гармонический фон и ритмику, ориентированную как на прослушивание в сетах, так и на стриминговые платформы.</p>
+        </div>
+        
+        <div class="footer">© 2026 Mate. All rights reserved.</div>
+    </div>
+    
+    <script src="waveform_data.js"></script>
+    <script src="player.js"></script>
+</body>
+</html>
