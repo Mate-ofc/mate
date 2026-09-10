@@ -80,12 +80,19 @@
             overflow:hidden;
             padding-left:220px;
         }
-        .cover-art {
+        .cover-wrapper {
             position:absolute;
             top:0;
             bottom:0;
             left:0;
             width:220px;
+            z-index:1;
+        }
+        .cover-art {
+            position:absolute;
+            top:0;
+            left:0;
+            width:100%;
             height:100%;
             object-fit:cover;
             display:block;
@@ -93,8 +100,8 @@
         }
         .disc-art {
             position:absolute;
-            top:calc(50% - 0.5px);
-            left:109.5px;
+            top:50%;
+            left:50%;
             width:200px;
             height:200px;
             transform:translate(-50%, -50%);
@@ -288,7 +295,7 @@
 </head>
 <body>
     <video class="video-background" autoplay muted loop playsinline>
-        <source src="Видео/coverr-cheering-crowd-1136-1080p.mp4" type="video/mp4">
+        <source src="Видео/107314-676158783_medium.mp4" type="video/mp4">
     </video>
     <div class="video-overlay"></div>
     <div class="container">
@@ -296,8 +303,10 @@
         <p class="sub">DJ & Producer</p>
         <div class="divider"></div><!-- Плеер -->
         <div class="player">
-            <img src="Audio/Обложка 1.png" alt="Обложка" class="cover-art">
-            <img src="Audio/Обложка 2.png" alt="Диск" class="disc-art" id="discArt">
+            <div class="cover-wrapper">
+                <img src="Audio/Обложка 1.png" alt="Обложка" class="cover-art">
+                <img src="Audio/Обложка 2.png" alt="Диск" class="disc-art" id="discArt">
+            </div>
             <div class="player-content">
             <div class="player-header">
                 <button class="play-btn" id="playBtn">▶</button>
