@@ -297,42 +297,29 @@
                 text-align:center;
             }
             .player {
-                display:block;
-                position:relative;
-                height:100vw;
+                display:flex;
+                flex-direction:column;
                 max-width:100%;
-                border-radius:0;
+                border-radius:12px;
             }
             .cover-wrapper {
-                position:absolute;
-                top:0;
-                left:0;
+                position:relative;
                 width:100%;
-                height:100%;
+                height:100vw;
+                flex-shrink:0;
             }
             .cover-art {
-                border-radius:0;
+                border-radius:12px 12px 0 0;
             }
             .disc-art {
                 width:88vw;
                 height:88vw;
             }
             .player-content {
-                position:absolute;
-                top:50%;
-                left:0;
-                right:0;
-                transform:translateY(-50%);
+                position:relative;
                 padding:1rem;
                 background:#000000;
-                border-radius:0;
-                z-index:5;
-            }
-            .player-header {
-                margin-bottom:0.5rem;
-            }
-            .wave-container {
-                margin:0.5rem 0;
+                border-radius:0 0 12px 12px;
             }
             .wave-container {
                 height:50px;
