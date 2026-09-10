@@ -87,6 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
         progressFill.style.width = '0%';
         currentTimeEl.textContent = '0:00';
         drawWave(0);
+        discArt.classList.remove('spinning');
     });
     
     // Клик по волне для перемотки
