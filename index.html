@@ -274,22 +274,40 @@
                 margin-top:1.5em;
             }
             .player {
-                flex-direction:column;
+                display:block;
+                position:relative;
+                height:100vw;
                 max-width:100%;
             }
             .cover-wrapper {
+                position:absolute;
+                top:0;
+                left:0;
                 width:100%;
-                height:100vw;
+                height:100%;
             }
             .cover-art {
-                border-radius:12px 12px 0 0;
+                border-radius:12px;
             }
             .disc-art {
                 width:88vw;
                 height:88vw;
             }
             .player-content {
+                position:absolute;
+                bottom:0;
+                left:0;
+                right:0;
                 padding:1rem;
+                background:rgba(0,0,0,0.7);
+                backdrop-filter:blur(6px);
+                border-radius:0 0 12px 12px;
+            }
+            .player-header {
+                margin-bottom:0.5rem;
+            }
+            .wave-container {
+                margin:0.5rem 0;
             }
             .wave-container {
                 height:50px;
