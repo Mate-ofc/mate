@@ -58,6 +58,9 @@
             color:#c0c0c0;
             font-weight:300;
         }
+        .burger {
+            display:none;
+        }
         .nav {
             display:flex;
             gap:2rem;
@@ -133,12 +136,51 @@
             .page-title-left {
                 font-size:1rem;
             }
+            .burger {
+                display:flex;
+                flex-direction:column;
+                justify-content:center;
+                gap:5px;
+                width:32px;
+                height:32px;
+                background:none;
+                border:none;
+                cursor:pointer;
+                padding:0;
+                z-index:20;
+            }
+            .burger span {
+                display:block;
+                width:24px;
+                height:2px;
+                background:#c0c0c0;
+                transition:all 0.3s;
+            }
+            .burger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+            .burger.open span:nth-child(2) { opacity:0; }
+            .burger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
             .nav {
+                display:none;
+                position:absolute;
+                top:100%;
+                right:0;
+                flex-direction:column;
                 gap:1rem;
+                padding:1.5rem;
+                background:rgba(0,0,0,0.95);
+                border-radius:12px;
+                min-width:160px;
+                z-index:15;
+            }
+            .nav.open {
+                display:flex;
             }
             .nav a {
-                font-size:0.7rem;
-                letter-spacing:0.1em;
+                font-size:0.8rem;
+                letter-spacing:0.15em;
+            }
+            .top-bar {
+                position:relative;
             }
             .collage {
                 grid-template-columns:repeat(2, 1fr);
@@ -155,7 +197,10 @@
     <div class="container">
         <div class="top-bar">
             <div class="page-title-left">Gallery</div>
-            <nav class="nav">
+            <button class="burger" id="burger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="nav" id="navMain">
                 <a href="/mate/music.html">Music</a>
                 <a href="/mate/video.html">Video</a>
                 <a href="/mate/photos.html" class="active">Photos</a>
@@ -175,5 +220,15 @@
         </div>
         <div class="footer">© 2026 Mate. All rights reserved.</div>
     </div>
+    <script>
+        const burger = document.getElementById('burger');
+        const navMain = document.getElementById('navMain');
+        if (burger) {
+            burger.addEventListener('click', () => {
+                burger.classList.toggle('open');
+                navMain.classList.toggle('open');
+            });
+        }
+    </script>
 </body>
 </html>
