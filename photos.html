@@ -99,16 +99,23 @@
             height:auto;
             display:block;
         }
+        .photo img {
+            filter:sepia(60%) contrast(1.05) brightness(0.85);
+            transition:filter 0.3s;
+        }
         .photo::after {
             content:'';
             position:absolute;
             inset:0;
-            background:rgba(25,10,50,0.55);
+            background:rgba(60,40,20,0.35);
             transition:opacity 0.3s;
             pointer-events:none;
         }
         .photo:hover::after {
             opacity:0;
+        }
+        .photo:hover img {
+            filter:sepia(0%) contrast(1) brightness(1);
         }
         .footer {
             margin-top:4em;
