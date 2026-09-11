@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mate</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        @font-face {
+            font-family: 'MainFont';
+            src: url('Шрифты/AbegPrettyLindaCute.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        html, body {
+            background:#111;
+            color:#fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            min-height:100vh;
+        }
+        .video-background {
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            z-index:0;
+            pointer-events:none;
+        }
+        .video-overlay {
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background:rgba(0,0,0,0.85);
+            z-index:1;
+            pointer-events:none;
+        }
+        .container {
+            position:relative;
+            z-index:2;
+            max-width:900px;
+            margin:0 auto;
+            padding:4rem 2rem;
+        }
+        .top-bar {
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:3rem;
+            position:relative;
+        }
+        .page-title-left {
+            font-size:1.4rem;
+            letter-spacing:0.3em;
+            text-transform:uppercase;
+            color:#c0c0c0;
+            font-weight:300;
+        }
+        .burger {
+            display:none;
+        }
+        .nav {
+            display:flex;
+            gap:2rem;
+        }
+        .nav a {
+            color:#c0c0c0;
+            text-decoration:none;
+            font-size:0.8rem;
+            text-transform:uppercase;
+            letter-spacing:0.15em;
+            transition:color 0.2s;
+        }
+        .nav a:hover, .nav a.active {
+            color:#fff;
+        }
+        .nav-sep {
+            color:#444;
+            font-size:0.8rem;
+        }
+        .nav-home {
+            color:#666 !important;
+        }
+        .nav-home:hover {
+            color:#fff !important;
+        }
+        
+        /* Плеер */
+        .player {
+            background:#000000;
+            border-radius:12px;
+            text-align:left;
+            overflow:hidden;
+            display:flex;
+            align-items:stretch;
+            margin-bottom:1.5rem;
+        }
+        .cover-wrapper {
+            position:relative;
+            width:220px;
+            flex-shrink:0;
+        }
+        .cover-art {
+            position:absolute;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            display:block;
+            border-radius:12px 0 0 12px;
+        }
+        .player-content {
+            flex:1;
+            min-width:0;
+            padding:1.5rem 1.5rem 1rem 1.5rem;
+        }
+        .player-header {
+            display:flex;
+            align-items:center;
+            gap:1rem;
+            margin-bottom:1rem;
+        }
+        .play-btn {
+            width:48px;
+            height:48px;
+            border-radius:50%;
+            background:#e0e0e0;
+            border:none;
+            color:#000000;
+            font-size:1.2rem;
+            cursor:pointer;
+            flex-shrink:0;
+            transition:background 0.2s;
+        }
+        .play-btn:hover {
+            background:#c0c0c0;
+        }
+        .track-info {
+            flex:1;
+            min-width:0;
+        }
+        .track-title {
+            font-size:0.9rem;
+            font-weight:600;
+            margin-bottom:0.2rem;
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+        }
+        .track-artist {
+            font-size:0.8rem;
+            color:#888;
+        }
+        .download-icon {
+            margin-left:1rem;
+            margin-top:-4px;
+            color:#888;
+            text-decoration:none;
+            cursor:pointer;
+            transition:color 0.2s;
+            flex-shrink:0;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            width:28px;
+            height:28px;
+        }
+        .download-icon:hover {
+            color:#e0e0e0;
+        }
+        .download-icon svg {
+            width:20px;
+            height:20px;
+            stroke:currentColor;
+            stroke-width:1.5;
+            fill:none;
+            stroke-linecap:round;
+            stroke-linejoin:round;
+        }
+        .wave-container {
+            width:100%;
+            height:80px;
+            margin:1rem 0;
+            cursor:pointer;
+            position:relative;
+        }
+        .wave-canvas {
+            width:100%;
+            height:100%;
+            display:block;
+        }
+        .progress-bar {
+            width:100%;
+            height:4px;
+            background:#2a2a2a;
+            border-radius:2px;
+            cursor:pointer;
+            margin-top:0.5rem;
+            position:relative;
+        }
+        .progress-fill {
+            width:0%;
+            height:100%;
+            background:#e0e0e0;
+            border-radius:2px;
+            transition:width 0.1s linear;
+        }
+        .time-display {
+            display:flex;
+            justify-content:space-between;
+            font-size:0.75rem;
+            color:#888;
+            margin-top:0.5rem;
+        }
+        .footer {
+            margin-top:3em;
+            font-size:0.7rem;
+            color:#555;
+            text-align:center;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding:2rem 1rem;
+            }
+            .page-title-left {
+                font-size:1rem;
+            }
+            .burger {
+                display:flex;
+                flex-direction:column;
+                justify-content:center;
+                gap:5px;
+                width:32px;
+                height:32px;
+                background:none;
+                border:none;
+                cursor:pointer;
+                padding:0;
+                z-index:20;
+            }
+            .burger span {
+                display:block;
+                width:24px;
+                height:2px;
+                background:#c0c0c0;
+                transition:all 0.3s;
+            }
+            .burger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+            .burger.open span:nth-child(2) { opacity:0; }
+            .burger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+            .nav {
+                display:none;
+                position:absolute;
+                top:100%;
+                right:0;
+                flex-direction:column;
+                gap:1rem;
+                padding:1.5rem;
+                background:rgba(0,0,0,0.95);
+                border-radius:12px;
+                min-width:160px;
+                z-index:15;
+            }
+            .nav.open {
+                display:flex;
+            }
+            .nav a {
+                font-size:0.8rem;
+                letter-spacing:0.15em;
+            }
+            .player {
+                flex-direction:column;
+            }
+            .cover-wrapper {
+                width:100%;
+                height:280px;
+            }
+            .cover-art {
+                border-radius:12px 12px 0 0;
+            }
+            .player-content {
+                padding:1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <video class="video-background" autoplay muted loop playsinline>
+        <source src="Видео/Фон.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+    <div class="container">
+        <div class="top-bar">
+            <div class="page-title-left">Music</div>
+            <button class="burger" id="burger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="nav" id="navMain">
+                <a href="/mate/music.html" class="active">Music</a>
+                <a href="/mate/video.html">Video</a>
+                <a href="/mate/photos.html">Photos</a>
+                <a href="/mate/dates.html">Dates</a>
+                <a href="/mate/booking.html">Booking</a>
+                <span class="nav-sep">/</span>
+                <a href="/mate/index.html" class="nav-home">Home</a>
+            </nav>
+        </div>
+        
+        <div class="player" data-audio="Audio/Mate - Echoes of Dusk (Extended Mix).mp3">
+            <div class="cover-wrapper">
+                <img src="Audio/Обложка 1.webp" alt="Обложка" class="cover-art">
+            </div>
+            <div class="player-content">
+                <div class="player-header">
+                    <button class="play-btn">▶</button>
+                    <div class="track-info">
+                        <div class="track-title">Echoes of Dusk (Extended Mix)</div>
+                        <div class="track-artist">Mate</div>
+                    </div>
+                    <a href="Audio/Mate - Echoes of Dusk (Extended Mix).mp3" download class="download-icon" title="Скачать трек"><svg viewBox="0 0 24 24"><path d="M12 4v12m0 0l-5-5m5 5l5-5"/><path d="M4 20h16"/></svg></a>
+                </div>
+                <div class="wave-container">
+                    <canvas class="wave-canvas"></canvas>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="time-display">
+                    <span class="current-time">0:00</span>
+                    <span class="duration">0:00</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="player" data-audio="Audio/Mate - Echoes of Dusk (Extended Mix).mp3">
+            <div class="cover-wrapper">
+                <img src="Audio/Обложка 1.webp" alt="Обложка" class="cover-art">
+            </div>
+            <div class="player-content">
+                <div class="player-header">
+                    <button class="play-btn">▶</button>
+                    <div class="track-info">
+                        <div class="track-title">Echoes of Dusk (Extended Mix)</div>
+                        <div class="track-artist">Mate</div>
+                    </div>
+                    <a href="Audio/Mate - Echoes of Dusk (Extended Mix).mp3" download class="download-icon" title="Скачать трек"><svg viewBox="0 0 24 24"><path d="M12 4v12m0 0l-5-5m5 5l5-5"/><path d="M4 20h16"/></svg></a>
+                </div>
+                <div class="wave-container">
+                    <canvas class="wave-canvas"></canvas>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="time-display">
+                    <span class="current-time">0:00</span>
+                    <span class="duration">0:00</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="player" data-audio="Audio/Mate - Echoes of Dusk (Extended Mix).mp3">
+            <div class="cover-wrapper">
+                <img src="Audio/Обложка 1.webp" alt="Обложка" class="cover-art">
+            </div>
+            <div class="player-content">
+                <div class="player-header">
+                    <button class="play-btn">▶</button>
+                    <div class="track-info">
+                        <div class="track-title">Echoes of Dusk (Extended Mix)</div>
+                        <div class="track-artist">Mate</div>
+                    </div>
+                    <a href="Audio/Mate - Echoes of Dusk (Extended Mix).mp3" download class="download-icon" title="Скачать трек"><svg viewBox="0 0 24 24"><path d="M12 4v12m0 0l-5-5m5 5l5-5"/><path d="M4 20h16"/></svg></a>
+                </div>
+                <div class="wave-container">
+                    <canvas class="wave-canvas"></canvas>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="time-display">
+                    <span class="current-time">0:00</span>
+                    <span class="duration">0:00</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">© 2026 Mate. All rights reserved.</div>
+    </div>
+    
+    <script src="waveform_data.js"></script>
+    <script src="player.js"></script>
+    <script>
+        const burger = document.getElementById('burger');
+        const navMain = document.getElementById('navMain');
+        if (burger) {
+            burger.addEventListener('click', () => {
+                burger.classList.toggle('open');
+                navMain.classList.toggle('open');
+            });
+        }
+    </script>
+</body>
+</html>
