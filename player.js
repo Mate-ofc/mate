@@ -50,19 +50,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Воспроизведение/пауза
-    const discArt = document.getElementById('discArt');
-    
     playBtn.addEventListener('click', function() {
         if (isPlaying) {
             audio.pause();
             playBtn.textContent = '▶';
             isPlaying = false;
-            discArt.classList.remove('spinning');
         } else {
             audio.play();
             playBtn.textContent = '❚❚';
             isPlaying = true;
-            discArt.classList.add('spinning');
         }
     });
     
@@ -87,7 +83,6 @@ document.addEventListener('DOMContentLoaded', function() {
         progressFill.style.width = '0%';
         currentTimeEl.textContent = '0:00';
         drawWave(0);
-        discArt.classList.remove('spinning');
     });
     
     // Клик по волне для перемотки
