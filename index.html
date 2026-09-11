@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mate — DJ & Producer</title>
+    <link rel="preload" href="Audio/Обложка 1.jpg" as="image">
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
         @font-face {
@@ -362,7 +363,7 @@
     </style>
 </head>
 <body>
-    <video class="video-background" autoplay muted loop playsinline>
+    <video class="video-background" autoplay muted loop playsinline preload="metadata" poster="Audio/Обложка 1.jpg">
         <source src="Видео/Фон.mp4" type="video/mp4">
     </video>
     <div class="video-overlay"></div>
