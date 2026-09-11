@@ -296,12 +296,20 @@
                 overflow-y:auto;
             }
             body {
-                display:block;
+                display:flex;
+                flex-direction:column;
+                min-height:100vh;
                 padding:2rem 1rem 1rem 1rem;
             }
             .container {
                 max-width:100%;
                 padding:0;
+                display:flex;
+                flex-direction:column;
+                flex:1;
+            }
+            .footer {
+                margin-top:auto;
             }
             h1 {
                 font-size:clamp(3.5rem, 18vw, 6rem);
