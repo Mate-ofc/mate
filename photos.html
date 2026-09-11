@@ -51,19 +51,19 @@
             align-items:center;
             margin-bottom:3rem;
         }
-        .logo-small {
-            font-family: 'MainFont', sans-serif;
-            font-size:2.5rem;
-            letter-spacing:-0.02em;
-            color:#fff;
-            text-decoration:none;
+        .page-title-left {
+            font-size:1.4rem;
+            letter-spacing:0.3em;
+            text-transform:uppercase;
+            color:#c0c0c0;
+            font-weight:300;
         }
         .nav {
             display:flex;
             gap:2rem;
         }
         .nav a {
-            color:#888;
+            color:#c0c0c0;
             text-decoration:none;
             font-size:0.8rem;
             text-transform:uppercase;
@@ -73,14 +73,7 @@
         .nav a:hover, .nav a.active {
             color:#fff;
         }
-        .page-title {
-            font-size:1.8rem;
-            letter-spacing:0.3em;
-            text-transform:uppercase;
-            color:#888;
-            margin-bottom:1.5em;
-            text-align:center;
-        }
+
         .collage {
             display:grid;
             grid-template-columns:repeat(3, 1fr);
@@ -127,8 +120,8 @@
             .container {
                 padding:2rem 1rem;
             }
-            .logo-small {
-                font-size:2rem;
+            .page-title-left {
+                font-size:1rem;
             }
             .nav {
                 gap:1rem;
@@ -151,13 +144,15 @@
     <div class="video-overlay"></div>
     <div class="container">
         <div class="top-bar">
-            <a href="/mate/index.html" class="logo-small">Mate</a>
+            <div class="page-title-left">Gallery</div>
             <nav class="nav">
-                <a href="/mate/index.html">Home</a>
+                <a href="/mate/music.html">Music</a>
+                <a href="/mate/video.html">Video</a>
                 <a href="/mate/photos.html" class="active">Photos</a>
+                <a href="/mate/dates.html">Dates</a>
+                <a href="/mate/booking.html">Booking</a>
             </nav>
         </div>
-        <div class="page-title">Gallery</div>
         <div class="collage">
             <div class="photo"><img loading="lazy" src="Фото/small/0058.webp" alt="Photo" width="933" height="1400"></div>
             <div class="photo"><img loading="lazy" src="Фото/small/0062.webp" alt="Photo" width="933" height="1400"></div>
