@@ -53,19 +53,19 @@
             margin:0 auto;
         }
         .nav-top {
-            position:absolute;
-            top:1rem;
-            right:2rem;
             display:flex;
-            gap:2rem;
+            justify-content:center;
+            gap:2.5rem;
+            margin:2.5em 0 0.5em 0;
             z-index:3;
         }
         .nav-top a {
             color:#888;
             text-decoration:none;
-            font-size:0.8rem;
+            font-size:0.75rem;
+            font-weight:300;
             text-transform:uppercase;
-            letter-spacing:0.15em;
+            letter-spacing:0.2em;
             transition:color 0.2s;
         }
         .nav-top a:hover, .nav-top a.active {
@@ -296,13 +296,12 @@
                 letter-spacing:0.2em;
             }
             .nav-top {
-                position:static;
-                justify-content:center;
-                gap:1.5rem;
-                margin-bottom:1rem;
+                gap:1rem;
+                margin:1.5em 0 0.5em 0;
+                flex-wrap:wrap;
             }
             .nav-top a {
-                font-size:0.7rem;
+                font-size:0.65rem;
                 letter-spacing:0.1em;
             }
             .divider {
@@ -368,13 +367,16 @@
     </video>
     <div class="video-overlay"></div>
     <div class="container">
-        <nav class="nav-top">
-            <a href="/mate/index.html" class="active">Home</a>
-            <a href="/mate/photos.html">Photos</a>
-        </nav>
         <h1>Mate</h1>
         <p class="sub">DJ & Producer</p>
         <div class="divider"></div><!-- Плеер -->
+        <nav class="nav-top">
+            <a href="/mate/music.html">Music</a>
+            <a href="/mate/video.html">Video</a>
+            <a href="/mate/photos.html">Photos</a>
+            <a href="/mate/dates.html">Dates</a>
+            <a href="/mate/booking.html">Booking</a>
+        </nav>
         <div class="player">
             <div class="cover-wrapper">
                 <img src="Audio/Обложка 1.png" alt="Обложка" class="cover-art">
