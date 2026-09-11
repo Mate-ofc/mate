@@ -59,6 +59,9 @@
             padding:0 2rem;
             margin:0 auto;
         }
+        .burger {
+            display:none;
+        }
         .nav-top {
             display:flex;
             justify-content:center;
@@ -311,14 +314,47 @@
             .divider {
                 margin:1em auto;
             }
+            .burger {
+                display:flex;
+                flex-direction:column;
+                justify-content:center;
+                gap:5px;
+                position:absolute;
+                top:1rem;
+                right:1rem;
+                width:32px;
+                height:32px;
+                background:none;
+                border:none;
+                cursor:pointer;
+                z-index:20;
+                padding:0;
+            }
+            .burger span {
+                display:block;
+                width:24px;
+                height:2px;
+                background:#c0c0c0;
+                transition:all 0.3s;
+            }
+            .burger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+            .burger.open span:nth-child(2) { opacity:0; }
+            .burger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
             .nav-top {
-                gap:1rem;
-                margin:1.2em 0 0.5em 0;
-                flex-wrap:wrap;
+                display:none;
+                flex-direction:column;
+                gap:1.2rem;
+                margin:1.5em 0 0.5em 0;
+                padding:1.5rem;
+                background:rgba(0,0,0,0.95);
+                border-radius:12px;
+            }
+            .nav-top.open {
+                display:flex;
             }
             .nav-top a {
-                font-size:0.65rem;
-                letter-spacing:0.1em;
+                font-size:0.8rem;
+                letter-spacing:0.15em;
             }
             .player {
                 display:flex;
@@ -387,7 +423,10 @@
         <h1>Mate</h1>
         <p class="sub">DJ & Producer</p>
         <div class="divider"></div><!-- Плеер -->
-        <nav class="nav-top">
+        <button class="burger" id="burger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <nav class="nav-top" id="navTop">
             <a href="/mate/music.html">Music</a>
             <a href="/mate/video.html">Video</a>
             <a href="/mate/photos.html">Photos</a>
@@ -429,5 +468,15 @@
     
     <script src="waveform_data.js"></script>
     <script src="player.js"></script>
+    <script>
+        const burger = document.getElementById('burger');
+        const navTop = document.getElementById('navTop');
+        if (burger) {
+            burger.addEventListener('click', () => {
+                burger.classList.toggle('open');
+                navTop.classList.toggle('open');
+            });
+        }
+    </script>
 </body>
 </html>
