@@ -178,7 +178,7 @@
             flex:1;
             min-width:0;
         }
-        #trackTitle {
+        .track-title {
             font-size:0.9rem;
             font-weight:600;
             margin-bottom:0.2rem;
@@ -224,7 +224,7 @@
             cursor:pointer;
             position:relative;
         }
-        #waveCanvas {
+        .wave-canvas {
             width:100%;
             height:100%;
             display:block;
@@ -238,7 +238,7 @@
             margin-top:0.5rem;
             position:relative;
         }
-        #progressFill {
+        .progress-fill {
             width:0%;
             height:100%;
             background:#e0e0e0;
@@ -412,28 +412,28 @@
             <a href="/mate/dates.html">Dates</a>
             <a href="/mate/booking.html">Booking</a>
         </nav>
-        <div class="player">
+        <div class="player" data-audio="Audio/Mate - Echoes of Dusk (Extended Mix).mp3">
             <div class="cover-wrapper">
                 <img src="Audio/Обложка 1.webp" alt="Обложка" class="cover-art">
             </div>
             <div class="player-content">
             <div class="player-header">
-                <button class="play-btn" id="playBtn">▶</button>
+                <button class="play-btn">▶</button>
                 <div class="track-info">
-                    <div id="trackTitle">Echoes of Dusk (Extended Mix)</div>
+                    <div class="track-title">Echoes of Dusk (Extended Mix)</div>
                     <div class="track-artist">Mate</div>
                 </div>
                 <a href="Audio/Mate - Echoes of Dusk (Extended Mix).mp3" download class="download-icon" title="Скачать трек"><svg viewBox="0 0 24 24"><path d="M12 4v12m0 0l-5-5m5 5l5-5"/><path d="M4 20h16"/></svg></a>
             </div>
-            <div class="wave-container" id="waveContainer">
-                <canvas id="waveCanvas"></canvas>
+            <div class="wave-container">
+                <canvas class="wave-canvas"></canvas>
             </div>
-            <div class="progress-bar" id="progressBar">
-                <div id="progressFill"></div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
             </div>
             <div class="time-display">
-                <span id="currentTime">0:00</span>
-                <span id="duration">0:00</span>
+                <span class="current-time">0:00</span>
+                <span class="duration">0:00</span>
             </div>
             </div>
             </div>
