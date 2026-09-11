@@ -82,16 +82,16 @@
             text-align:center;
         }
         .collage {
-            column-count:3;
-            column-gap:12px;
+            display:grid;
+            grid-template-columns:repeat(3, 1fr);
+            gap:12px;
+            align-items:start;
         }
         .photo {
             position:relative;
             display:block;
-            margin-bottom:12px;
             border-radius:6px;
             overflow:hidden;
-            break-inside:avoid;
             cursor:pointer;
         }
         .photo img {
@@ -131,11 +131,8 @@
                 letter-spacing:0.1em;
             }
             .collage {
-                column-count:2;
-                column-gap:8px;
-            }
-            .collage img {
-                margin-bottom:8px;
+                grid-template-columns:repeat(2, 1fr);
+                gap:8px;
             }
         }
     </style>
