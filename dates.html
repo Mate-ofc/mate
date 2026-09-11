@@ -101,12 +101,7 @@
             align-items:center;
             gap:1.5rem;
         }
-        .month-title::after {
-            content:'';
-            flex:1;
-            height:1px;
-            background:#222;
-        }
+
         .events {
             display:flex;
             flex-direction:column;
@@ -143,17 +138,20 @@
             color:#e0e0e0;
         }
         .event-tag {
-            font-size:0.7em;
+            font-size:0.55em;
+            font-weight:200;
             color:#888;
             text-transform:lowercase;
             letter-spacing:0.05em;
             margin-left:0.3rem;
-            align-self:center;
+            align-self:flex-end;
+            padding-bottom:0.35em;
         }
         .event-time {
             margin-left:auto;
             color:#c0c0c0;
-            font-size:1em;
+            font-size:0.7em;
+            font-weight:200;
         }
         @media (max-width: 768px) {
             .container {
