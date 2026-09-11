@@ -52,6 +52,25 @@
             padding:0 2rem;
             margin:0 auto;
         }
+        .nav-top {
+            position:absolute;
+            top:1rem;
+            right:2rem;
+            display:flex;
+            gap:2rem;
+            z-index:3;
+        }
+        .nav-top a {
+            color:#888;
+            text-decoration:none;
+            font-size:0.8rem;
+            text-transform:uppercase;
+            letter-spacing:0.15em;
+            transition:color 0.2s;
+        }
+        .nav-top a:hover, .nav-top a.active {
+            color:#fff;
+        }
         h1 {
             font-family: 'MainFont', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             font-size: 15rem;
@@ -276,6 +295,16 @@
                 font-size:0.75rem;
                 letter-spacing:0.2em;
             }
+            .nav-top {
+                position:static;
+                justify-content:center;
+                gap:1.5rem;
+                margin-bottom:1rem;
+            }
+            .nav-top a {
+                font-size:0.7rem;
+                letter-spacing:0.1em;
+            }
             .divider {
                 margin:0.8em auto;
             }
@@ -339,6 +368,10 @@
     </video>
     <div class="video-overlay"></div>
     <div class="container">
+        <nav class="nav-top">
+            <a href="index.html" class="active">Home</a>
+            <a href="photos.html">Photos</a>
+        </nav>
         <h1>Mate</h1>
         <p class="sub">DJ & Producer</p>
         <div class="divider"></div><!-- Плеер -->
