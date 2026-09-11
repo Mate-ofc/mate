@@ -34,7 +34,7 @@
             left:0;
             width:100%;
             height:100%;
-            background:rgba(20,10,40,0.85);
+            background:rgba(0,0,0,0.85);
             z-index:1;
             pointer-events:none;
         }
@@ -84,20 +84,34 @@
             column-count:3;
             column-gap:12px;
         }
-        .collage img {
-            width:100%;
-            height:auto;
+        .photo {
+            position:relative;
             display:block;
             margin-bottom:12px;
             border-radius:6px;
-            transition:transform 0.3s, filter 0.3s;
-            cursor:pointer;
-            filter:grayscale(30%);
+            overflow:hidden;
             break-inside:avoid;
+            cursor:pointer;
         }
-        .collage img:hover {
+        .photo img {
+            width:100%;
+            height:auto;
+            display:block;
+            transition:transform 0.3s;
+        }
+        .photo::after {
+            content:'';
+            position:absolute;
+            inset:0;
+            background:rgba(25,10,50,0.55);
+            transition:opacity 0.3s;
+            pointer-events:none;
+        }
+        .photo:hover img {
             transform:scale(1.04);
-            filter:grayscale(0%);
+        }
+        .photo:hover::after {
+            opacity:0;
         }
         .footer {
             margin-top:4em;
@@ -144,15 +158,15 @@
         </div>
         <div class="page-title">Gallery</div>
         <div class="collage">
-            <img src="Фото/small/0058.jpg" alt="Photo">
-            <img src="Фото/small/0061.jpg" alt="Photo">
-            <img src="Фото/small/0062.jpg" alt="Photo">
-            <img src="Фото/small/0063.jpg" alt="Photo">
-            <img src="Фото/small/0064.jpg" alt="Photo">
-            <img src="Фото/small/0065.jpg" alt="Photo">
-            <img src="Фото/small/0067.jpg" alt="Photo">
-            <img src="Фото/small/0068.jpg" alt="Photo">
-            <img src="Фото/small/0069.jpg" alt="Photo">
+            <div class="photo"><img src="Фото/small/0058.jpg" alt="Photo"></div>
+            <div class="photo"><img src="Фото/small/0061.jpg" alt="Photo"></div>
+            <div class="photo"><img src="Фото/small/0062.jpg" alt="Photo"></div>
+            <div class="photo"><img src="Фото/small/0063.jpg" alt="Photo"></div>
+            <div class="photo"><img src="Фото/small/0064.jpg" alt="Photo"></div>
+            <div class="photo"><img src="Фото/small/0065.jpg" alt="Photo"></div>
+            <div class="photo"><img src="Фото/small/0067.jpg" alt="Photo"></div>
+            <div class="photo"><img src="Фото/small/0068.jpg" alt="Photo"></div>
+            <div class="photo"><img src="Фото/small/0069.jpg" alt="Photo"></div>
         </div>
         <div class="footer">© 2026 Mate. All rights reserved.</div>
     </div>
