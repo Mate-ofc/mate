@@ -97,7 +97,6 @@
             width:100%;
             height:auto;
             display:block;
-            transition:transform 0.3s;
         }
         .photo::after {
             content:'';
@@ -106,12 +105,6 @@
             background:rgba(25,10,50,0.55);
             transition:opacity 0.3s;
             pointer-events:none;
-        }
-        .photo:hover {
-            z-index:10;
-        }
-        .photo:hover img {
-            transform:scale(1.04);
         }
         .photo:hover::after {
             opacity:0;
